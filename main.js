@@ -12,9 +12,41 @@
 //lets make an employee profile using closures
 
 function employee(name, salary) {
+    var friends = []
     return {
         name: name,
-        salary: salary
+        salary: salary,
+        sayMyName : function() {
+            return this.name
+        },
+        sayHello : function() {
+            return 'Hello ' + this.name
+        },
+        increaseSalary : function(n) {
+            this.salary += n;
+            return 'Your salary is ' + this.salary + '$';
+        },
+        addFriend : function(obj) {
+            friends.push(obj.name)
+            var res = "you just became friend with "
+            for(var i = 0; i < friends.length; i++){
+               if(i === 0){
+                res += friends[i]
+               }else{
+                res = res + " and " + friends[i];
+               } 
+            }
+            return res
+        },
+        listFriends : function() {
+            if (friends.length === 0){
+                return "You don't have friends."
+            }
+            if(friends.length === 1){
+                return "You have 1 friend"
+            }
+            return "You have " + friends.length + " friends";
+        }
     }
 }
 
@@ -67,11 +99,47 @@ var employeeC = employee("Sara", 150);
 // f- in order to change the state of the pet, create a function called changeState, when called it will make the pet avaliablity true,
 //    and when called again it will make it false.
 
-
 // Write your code here .....
+function Pet(name){
+    var pet = {};
+    pet.name = name;
+    pet.addInfo = addInfo;
+    pet.increaseAge = increaseAge;
+    pet.availability = false;
+    pet.checkPetState = checkPetState;
+    pet.changePetState = changePetState;
+    return pet;
+}
 
+function addInfo(age, owner, gender, species){
+    this.age = age;
+    this.owner = owner;
+    this.gender = gender;
+    this.species = species;
+}
+
+function increaseAge(n){
+    this.age += n;
+    return "The age is now " + this.age;
+}
+
+function checkPetState(){
+    if (this.availability){
+        return true;
+    }
+    return false;
+}
+
+function changePetState(){
+    if(this.availability){
+        this.availability = false;
+    }else{
+        this.availability = true;
+    }
+}
 
 // Now, to make sure that you are actually reading, make a comment below this and type: Yes I am
+//Yes I am !!!
 
 //=============================================================================
 /*                                  Q3                                       */
@@ -103,7 +171,14 @@ function reduce(array, f, acc) {
 
 // Write your code here .....
 
-
+function max(array){
+    return reduce(array, function(acc, element){
+        if(element > acc){
+            return element;
+        }
+        return acc;
+    })
+}
 
 
 //================================================================================
